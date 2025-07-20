@@ -17,7 +17,6 @@
 ## Feature data-r2dbc documentation
 
 - [Micronaut Data R2DBC documentation](https://micronaut-projects.github.io/micronaut-data/latest/guide/#dbc)
-
 - [https://r2dbc.io](https://r2dbc.io)
 
 
@@ -29,7 +28,6 @@
 ## Feature r2dbc documentation
 
 - [Micronaut R2DBC documentation](https://micronaut-projects.github.io/micronaut-r2dbc/latest/guide/)
-
 - [https://r2dbc.io](https://r2dbc.io)
 
 
@@ -41,7 +39,6 @@
 ## Feature lombok documentation
 
 - [Micronaut Project Lombok documentation](https://docs.micronaut.io/latest/guide/index.html#lombok)
-
 - [https://projectlombok.org/features/all](https://projectlombok.org/features/all)
 
 
@@ -58,7 +55,6 @@
 ## Feature swagger-ui documentation
 
 - [Micronaut Swagger UI documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
 - [https://swagger.io/tools/swagger-ui/](https://swagger.io/tools/swagger-ui/)
 
 
@@ -70,19 +66,15 @@
 ## Feature openapi documentation
 
 - [Micronaut OpenAPI Support documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
 - [https://www.openapis.org](https://www.openapis.org)
 
 
 ## Feature flyway documentation
 
 - [Micronaut Flyway Database Migration documentation](https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html)
-
 - [https://flywaydb.org/](https://flywaydb.org/)
 
 
 ## Feature jdbc-hikari documentation
 
 - [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
-
-

@@ -24,7 +24,7 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-r2dbc")
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.reactor:micronaut-reactor")
-    implementation("io.micronaut.security:micronaut-security-jwt")
+//    implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.toml:micronaut-toml")
@@ -37,20 +37,20 @@ dependencies {
     runtimeOnly("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.postgresql:r2dbc-postgresql")
+    runtimeOnly("io.r2dbc:r2dbc-pool")
     testImplementation("io.micronaut:micronaut-http-client")
     aotPlugins platform("io.micronaut.platform:micronaut-platform:4.9.1")
     aotPlugins("io.micronaut.security:micronaut-security-aot")
 }
 
-
 application {
     mainClass = "com.clarxlabs.Application"
 }
+
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
     targetCompatibility = JavaVersion.toVersion("21")
 }
-
 
 graalvmNative.toolchainDetection = false
 
@@ -72,13 +72,10 @@ micronaut {
         deduceEnvironment = true
         optimizeNetty = true
         replaceLogbackXml = true
-        configurationProperties.put("micronaut.security.jwks.enabled","false")
+        configurationProperties.put("micronaut.security.jwks.enabled", "false")
     }
 }
-
 
 tasks.named("dockerfileNative") {
     jdkVersion = "21"
 }
-
-
