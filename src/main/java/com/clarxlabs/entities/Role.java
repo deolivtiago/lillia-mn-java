@@ -17,22 +17,19 @@ import java.util.Set;
 @Introspected
 @MappedEntity(value = "roles", alias = "r")
 public record Role(
-        @Id
-        @NonNull
-        @NotBlank
+        @NonNull @Id @NotBlank
         String id,
 
-        @NonNull
-        @NotNull
-        @TypeDef(type = DataType.STRING_ARRAY)
+        @NonNull @NotNull @TypeDef(type = DataType.STRING_ARRAY)
         Set<String> permissions,
 
-        @DateUpdated
-        @Nullable
+        @Nullable @DateUpdated
         ZonedDateTime updatedAt,
 
-        @DateCreated
-        @Nullable
+        @Nullable @DateCreated
         ZonedDateTime createdAt
 ) {
+    public Role(String id, ZonedDateTime updatedAt, ZonedDateTime createdAt) {
+        this(id, Set.of(), updatedAt, createdAt);
+    }
 }

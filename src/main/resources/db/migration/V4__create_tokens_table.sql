@@ -9,5 +9,5 @@ create table tokens (
 
     user_id uuid references users (id) on delete cascade on update cascade not null,
 
-    inserted_at timestamptz(0) not null
+    created_at timestamptz(0) not null
 );

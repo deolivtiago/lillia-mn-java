@@ -12,5 +12,5 @@ create table users (
     role_id text references roles (id) on delete restrict on update cascade not null default 'user',
 
     updated_at timestamptz(0) not null default now(),
-    inserted_at timestamptz(0) not null
+    created_at timestamptz(0) not null
 );

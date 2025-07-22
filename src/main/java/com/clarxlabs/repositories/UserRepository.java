@@ -1,12 +1,14 @@
 package com.clarxlabs.repositories;
 
-import com.clarxlabs.entities.Role;
+import com.clarxlabs.entities.User;
 import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.r2dbc.annotation.R2dbcRepository;
 import io.micronaut.data.repository.reactive.ReactorPageableRepository;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.UUID;
 
 @R2dbcRepository(dialect = Dialect.POSTGRES)
-public interface RoleRepository extends ReactorPageableRepository<@Valid Role, @NotBlank String> {
+public interface UserRepository extends ReactorPageableRepository<@Valid User, @NotNull UUID> {
 }
