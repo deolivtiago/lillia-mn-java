@@ -1,21 +1,23 @@
 package com.clarxlabs;
 
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.runtime.EmbeddedApplication;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-
-import jakarta.inject.Inject;
+import org.junit.jupiter.api.Test;
 
 @MicronautTest(transactional = false)
-class LilliaTest {
+class ApplicationTest {
 
-    @Inject
-    EmbeddedApplication<?> application;
+    @NonNull
+    private final EmbeddedApplication<?> application;
+
+    ApplicationTest(@NonNull EmbeddedApplication<?> application) {
+        this.application = application;
+    }
 
     @Test
     void testItWorks() {
         Assertions.assertTrue(application.isRunning());
     }
-
 }
