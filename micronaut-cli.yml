@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.clarxlabs
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [app-name, data, data-r2dbc, flyway, graalvm, gradle, http-client-test, java, java-application, jdbc-hikari, junit, logback, micronaut-aot, micronaut-build, micronaut-http-validation, netty-server, openapi, postgres, r2dbc, reactor, reactor-http-client, readme, security-annotations, security-jwt, serialization-jackson, shade, sourcegen-generator, static-resources, swagger-ui, test-resources, toml, toml-build, validation]
