@@ -1,7 +1,7 @@
 plugins {
     id("io.micronaut.application") version "4.5.4"
     id("com.gradleup.shadow") version "8.3.7"
-//    id("io.micronaut.test-resources") version "4.5.4"
+    id("io.micronaut.test-resources") version "4.5.4"
     id("io.micronaut.aot") version "4.5.4"
 }
 
@@ -25,6 +25,7 @@ dependencies {
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+    implementation("io.micrometer:context-propagation")
 //    implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.sourcegen:micronaut-sourcegen-annotations")
@@ -39,7 +40,16 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.postgresql:r2dbc-postgresql")
     runtimeOnly("io.r2dbc:r2dbc-pool")
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
     testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.testcontainers:postgresql")
+    testResourcesService("org.postgresql:postgresql")
+    testImplementation("io.micronaut.testresources:micronaut-test-resources-extensions-junit-platform")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("io.micronaut.test:micronaut-test-junit5")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("io.projectreactor:reactor-test")
     aotPlugins platform("io.micronaut.platform:micronaut-platform:4.9.2")
     aotPlugins("io.micronaut.security:micronaut-security-aot")
 }

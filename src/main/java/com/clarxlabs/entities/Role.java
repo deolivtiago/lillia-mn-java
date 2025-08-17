@@ -14,12 +14,11 @@ import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-
 @Wither
 @Builder
 @Serdeable
 @Introspected
-@MappedEntity(value = "roles", alias = "r")
+@MappedEntity(value = "roles", alias = "ro")
 public record Role(
         @Id @NotBlank
         @NonNull String id,
