@@ -1,5 +1,6 @@
 package com.clarxlabs.controllers;
 
+import com.clarxlabs.controllers.inputs.RoleInput;
 import com.clarxlabs.entities.Role;
 import com.clarxlabs.repositories.RoleRepository;
 import io.micronaut.core.annotation.NonNull;
@@ -29,8 +30,8 @@ public class RoleController {
 
     @Post
     @Status(HttpStatus.CREATED)
-    public @NonNull Mono<Role> create(final @Body @Valid @NonNull Role input) {
-        return roleRepository.save(input);
+    public @NonNull Mono<Role> create(final @Body @Valid @NonNull RoleInput input) {
+        return roleRepository.save(input.toRole());
     }
 
     @Get("/{id}")
@@ -41,8 +42,8 @@ public class RoleController {
 
     @Put("/{id}")
     @Status(HttpStatus.OK)
-    public @NonNull Mono<Role> update(final @NotBlank @NonNull String id, final @Body @Valid @NonNull Role input) {
-        return roleRepository.update(input.withId(id));
+    public @NonNull Mono<Role> update(final @NotBlank @NonNull String id, final @Body @Valid @NonNull RoleInput input) {
+        return roleRepository.update(input.toRole().withId(id));
     }
 
     @Delete("/{id}")

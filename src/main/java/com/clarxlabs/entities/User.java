@@ -26,7 +26,7 @@ public record User(
         @NotBlank @Email
         @NonNull String email,
 
-        @NotBlank
+        @NotBlank @Size(min = 6, max = 72)
         @NonNull String password,
 
         @NotBlank @Size(min = 2, max = 255)
