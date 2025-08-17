@@ -9,40 +9,49 @@ import io.micronaut.serde.annotation.Serdeable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Serdeable
 @Introspected
+@Builder(toBuilder = true)
 @MappedEntity(value = "users", alias = "us")
 public record User(
-        @Nullable @Id @AutoPopulated
-        UUID id,
+        @Id @AutoPopulated
+        @Nullable UUID id,
 
-        @NonNull @NotBlank @Email
-        String email,
+        @NotBlank @Email
+        @NonNull String email,
 
-        @NonNull @NotBlank
-        String password,
+        @NotBlank
+        @NonNull String password,
 
-        @NonNull @NotBlank @Size(min = 2, max = 255)
-        String fullName,
+        @NotBlank @Size(min = 2, max = 255)
+        @NonNull String fullName,
 
-        @Nullable @GeneratedValue @Size(max = 255)
-        String avatarUrl,
+        @GeneratedValue @Size(max = 255)
+        @Nullable String avatarUrl,
 
-        @Nullable @GeneratedValue
-        Boolean isVerified,
+        @GeneratedValue
+        @Nullable Boolean isVerified,
 
-        @Nullable @DateUpdated
-        ZonedDateTime updatedAt,
+        @DateUpdated
+        @Nullable ZonedDateTime updatedAt,
 
-        @Nullable @DateCreated
-        ZonedDateTime createdAt
+        @DateCreated
+        @Nullable ZonedDateTime createdAt
 ) {
     @Creator
-    public User(UUID id, String email, String password, String fullName, ZonedDateTime updatedAt, ZonedDateTime createdAt) {
+    public User(
+            @Nullable UUID id,
+            @NonNull String email,
+            @NonNull String password,
+            @NonNull String fullName,
+            @Nullable ZonedDateTime updatedAt,
+            @Nullable ZonedDateTime createdAt
+    ) {
         this(id, email, password, fullName, "", false, updatedAt, createdAt);
     }
 }

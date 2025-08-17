@@ -28,25 +28,44 @@ public class UserController {
 
     @Get
     @Status(HttpStatus.OK)
-    public Mono<Page<User>> index(@NonNull @Valid Pageable pageable) {
+    public Mono<Page<User>> index(final @Valid @NonNull Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
     @Post
     @Status(HttpStatus.CREATED)
-    public Mono<User> create(final @Body @Valid User data) {
-        return userRepository.save(data);
+    public Mono<User> create(final @Body @Valid @NonNull User input) {
+        final var user = User.builder()
+                .email(input.email().toLowerCase())
+                .avatarUrl(input.avatarUrl())
+                .fullName(input.fullName())
+                .password(input.password())
+                .build();
+
+        return userRepository.save(input);
     }
 
     @Get("/{id}")
     @Status(HttpStatus.OK)
-    public Mono<User> show(final UUID id) {
+    public Mono<User> show(final @Valid @NonNull UUID id) {
         return userRepository.findById(id);
+    }
+
+    @Put("/{id}")
+    public Mono<User> update(final @Valid @NonNull UUID id, final @Body @Valid @NonNull User input) {
+        final var user = User.builder().id(id)
+                .email(input.email().toLowerCase())
+                .avatarUrl(input.avatarUrl())
+                .fullName(input.fullName())
+                .password(input.password())
+                .build();
+
+        return userRepository.update(user);
     }
 
     @Delete("/{id}")
     @Status(HttpStatus.NO_CONTENT)
-    public Mono<Void> delete(final UUID id) {
+    public Mono<Void> delete(final @Valid @NonNull UUID id) {
         return userRepository.deleteById(id).then();
     }
 
