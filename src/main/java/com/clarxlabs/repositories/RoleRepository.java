@@ -7,7 +7,8 @@ import io.micronaut.data.r2dbc.annotation.R2dbcRepository;
 import io.micronaut.data.repository.reactive.ReactorPageableRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @R2dbcRepository(dialect = Dialect.POSTGRES)
-public interface RoleRepository extends ReactorPageableRepository<@Valid @NonNull Role, @NotBlank @NonNull String> {
+public interface RoleRepository extends ReactorPageableRepository<@NotNull @Valid @NonNull Role, @NotBlank @NonNull String> {
 }

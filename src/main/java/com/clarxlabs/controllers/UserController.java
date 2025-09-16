@@ -7,6 +7,8 @@ import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+@Secured(SecurityRule.IS_ANONYMOUS)
 @Validated
 @Controller("/users")
 public class UserController {
@@ -35,7 +38,12 @@ public class UserController {
     @Post
     @Status(HttpStatus.CREATED)
     public @NonNull Mono<User> create(final @Body @Valid @NonNull User input) {
-        return userRepository.save(input.withEmail(input.email().toLowerCase()));
+        final var user = input
+                .withUsername(input.username().toLowerCase())
+                .withCreatedBy(input.username().toLowerCase())
+                .withUpdatedBy(input.username().toLowerCase());
+
+        return userRepository.save(user);
     }
 
     @Get("/{id}")
@@ -46,7 +54,12 @@ public class UserController {
 
     @Put("/{id}")
     public @NonNull Mono<User> update(final @Valid @NonNull UUID id, final @Body @Valid @NonNull User input) {
-        return userRepository.update(input.withEmail(input.email().toLowerCase()).withId(id));
+        final var user = input.withId(id)
+                .withUsername(input.username().toLowerCase())
+                .withCreatedBy(input.username().toLowerCase())
+                .withUpdatedBy(input.username().toLowerCase());
+
+        return userRepository.update(user);
     }
 
     @Delete("/{id}")

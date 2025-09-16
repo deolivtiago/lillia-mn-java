@@ -7,7 +7,11 @@ import io.micronaut.core.annotation.NonNull;
 import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.http.HttpStatus;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.authentication.Authentication;
+import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -15,11 +19,19 @@ import reactor.core.publisher.Mono;
 
 @Validated
 @Controller("/roles")
+@Secured(SecurityRule.IS_AUTHENTICATED)
 public class RoleController {
     private final @NonNull RoleRepository roleRepository;
 
     public RoleController(final @NonNull RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
+    }
+
+    @Get("/info")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Status(HttpStatus.OK)
+    public @NonNull Mono<String> info(final Authentication auth) {
+        return Mono.just(auth.getAttributes().toString());
     }
 
     @Get
@@ -30,6 +42,7 @@ public class RoleController {
 
     @Post
     @Status(HttpStatus.CREATED)
+    @Secured({"ROLE_USER"})
     public @NonNull Mono<Role> create(final @Body @Valid @NonNull RoleInput input) {
         return roleRepository.save(input.toRole());
     }

@@ -17,25 +17,37 @@ serialization.inclusion = "ALWAYS"
 [datasources.default]
 driver-class-name = "org.postgresql.Driver"
 db-type = "postgres"
-#url = "jdbc:postgresql://localhost:5432/lillia_mn_java"
+url = "jdbc:postgresql://localhost:5432/lillia_mn_java"
 #url = "jdbc:tc:postgresql:///lillia_mn_java"
-#username = "postgres"
-#password = "postgres"
+username = "postgres"
+password = "postgres"
 
 [r2dbc.datasources.default]
 dialect = "POSTGRES"
 db-type = "postgres"
-#url = "r2dbc:postgresql://localhost:5432/lillia_mn_java"
+url = "r2dbc:postgresql://localhost:5432/lillia_mn_java"
 #url = "r2dbc:tc:postgresql:///lillia_mn_java"
-#username = "postgres"
-#password = "postgres"
+username = "postgres"
+password = "postgres"
 [r2dbc.datasources.default.options]
 driver = "pool"
 protocol = "postgres"
 
-#[micronaut.security]
-#authentication = "bearer"
-#token.jwt.signatures.secret.generator.secret = '${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}'
+[micronaut.security]
+authentication = "bearer"
+reject-not-found = false
+#token.jwt.claims-validators.issuer = "lillia-api"
+#token.jwt.claims-validators.audience = "lillia-app"
+token.name-key = "carai"
+token.jwt.signatures.secret.generator.secret = "${JWT_GENERATOR_SIGNATURE_SECRET:a-string-secret-at-least-256-bits-long}"
+token.jwt.generator.refresh-token.secret = "${JWT_GENERATOR_SIGNATURE_SECRET:a-string-secret-at-least-256-bits-long}"
+token.generator.access-token.expiration = 86400
+endpoints.login.path = "/signin"
+endpoints.login.unsupported-post-content-type-status = 415
+endpoints.logout.path = "/signout"
+endpoints.logout.unsupported-post-content-type-status = 415
+endpoints.oauth.path = "/renew"
+endpoints.oauth.unsupported-post-content-type-status = 415
 
 [micronaut.router.static-resources.swagger]
 paths = "classpath:META-INF/swagger"
